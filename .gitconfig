@@ -1,0 +1,11 @@
+[user]
+	email = syd@scrimfind.org
+	name = Scott Wisely
+
+[color]
+	branch = auto
+	status = auto
+	diff = auto
+	ui = auto
+[pack]
+	threads = 0
