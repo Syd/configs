@@ -46,5 +46,6 @@ precmd() {
   title zsh "$PWD"
 }
 
-PROMPT="%n%B@%b%U%m%u: "
+PROMPT="%(?..%F{red}%?%f:)%n%B@%b%U%m%u: "
 RPROMPT="(%F{yellow}%~%f) %B%F{red}%1v%f%b"
+
