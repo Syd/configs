@@ -8,7 +8,7 @@ setopt prompt_subst
 zstyle ':vcs_info:*' formats '%s:%b '
 zstyle ':vcs_info:*' enable git cvs svn hg bzr
 zstyle ':completion:*' completer _complete _ignored
-zstyle :compinstall filename '/home/temp/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 bindkey -e
 
 alias l='ls --color'
