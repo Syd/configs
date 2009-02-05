@@ -6,21 +6,16 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/syd/.zshrc'
-zstyle ':vcs_info:*' formats '%s:%b '
-zstyle ':vcs_info:*' enable git cvs svn hg bzr
 
-autoload -Uz compinit prompt color vcs_info
+autoload -Uz compinit prompt color
 compinit
 # End of lines added by compinstall
 
 function precmd {
-    printf '\033]2;zsh\07';
-    psvar=()
-    vcs_info
-    [[ -n $vcs_info_msg_0_ ]] && psvar[1]="${(C)vcs_info_msg_0_}"
 
     local TERMWIDTH
     (( TERMWIDTH = ${COLUMNS} - 1 ))
+
 
     ###
     # Truncate the path if it's too long.
@@ -46,7 +41,6 @@ function precmd {
     elif which apm > /dev/null; then
 	PR_APM_RESULT=`apm`
     fi
-
 }
 
 
@@ -104,7 +98,7 @@ setprompt () {
 	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
 	    ;;
 	screen)
-	    PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} |  %y\e\\%}'
+	    PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
 	    ;;
 	*)
 	    PR_TITLEBAR=''
@@ -136,31 +130,28 @@ setprompt () {
     ###
     # Finally, the prompt.
 
-#    PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
-#$PR_CYAN$PR_SHIFT_IN$PR_ULCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
-#$PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l\
-#$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_HBAR${(e)PR_FILLBAR}$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
-#$PR_MAGENTA%$PR_PWDLEN<...<%~%<<\
-#$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_URCORNER$PR_SHIFT_OUT\
-#
-#$PR_CYAN$PR_SHIFT_IN$PR_LLCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
-#%(?..$PR_LIGHT_RED%?$PR_BLUE:)\
-#${(e)PR_APM}$PR_YELLOW%D{%H:%M}\
-#$PR_LIGHT_BLUE:%(!.$PR_RED.$PR_WHITE)%#$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-#$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-#$PR_NO_COLOUR '
-#
-#    RPROMPT=' $PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT\
-#($PR_YELLOW%D{%a,%b%d}$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
-#
-#    PS2='$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-#$PR_BLUE$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT(\
-#$PR_LIGHT_GREEN%_$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-#$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_NO_COLOUR '
-}
+    PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
+$PR_CYAN$PR_SHIFT_IN$PR_ULCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
+$PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l\
+$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_HBAR${(e)PR_FILLBAR}$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
+$PR_MAGENTA%$PR_PWDLEN<...<%~%<<\
+$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_URCORNER$PR_SHIFT_OUT\
 
-PROMPT="%F{178}%n%B@%b%F{166}%U%m%u%f: "
-RPROMPT="%F{154}%1v%F{green}%~%f"
+$PR_CYAN$PR_SHIFT_IN$PR_LLCORNER$PR_BLUE$PR_HBAR$PR_SHIFT_OUT(\
+%(?..$PR_LIGHT_RED%?$PR_BLUE:)\
+${(e)PR_APM}$PR_YELLOW%D{%H:%M}\
+$PR_LIGHT_BLUE:%(!.$PR_RED.$PR_WHITE)%#$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
+$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
+$PR_NO_COLOUR '
+
+    RPROMPT=' $PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT\
+($PR_YELLOW%D{%a,%b%d}$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
+
+    PS2='$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
+$PR_BLUE$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT(\
+$PR_LIGHT_GREEN%_$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
+$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_NO_COLOUR '
+}
 
 setprompt
 
