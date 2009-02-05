@@ -16,6 +16,13 @@ alias ls='ls --color --file-type'
 alias ll='ls --color -lh'
 alias lh='ls --color -sh'
 alias la='ls --color -a'
+alias free='free -m'
+alias du='du -h -s'
+alias e='vim'
+
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+bindkey '\e[3~' delete-char
 
 setopt extended_glob
 
