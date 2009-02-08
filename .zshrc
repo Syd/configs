@@ -5,7 +5,7 @@ autoload -Uz prompt colors vcs_info compinit
 compinit
 colors
 setopt prompt_subst
-zstyle ':vcs_info:*' formats '%b/%s '
+zstyle ':vcs_info:*' formats '%r/%b '
 zstyle ':vcs_info:*' enable git svn
 zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '~/.zshrc'
