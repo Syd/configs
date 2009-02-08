@@ -5,8 +5,8 @@ autoload -Uz prompt colors vcs_info compinit
 compinit
 colors
 setopt prompt_subst
-zstyle ':vcs_info:*' formats '%s:%b '
-zstyle ':vcs_info:*' enable git cvs svn hg bzr
+zstyle ':vcs_info:*' formats '%b/%s '
+zstyle ':vcs_info:*' enable git svn
 zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '~/.zshrc'
 bindkey -e
@@ -132,4 +132,4 @@ precmd() {
 }
 
 PROMPT="%(!.%F{red}*** %f.)%(?..%F{red}%?%f:)%n%B@%b%U%m%u: "
-RPROMPT="(%F{yellow}%~%f) %B%F{red}%1v%f%b"
+RPROMPT="(%F{yellow}%~%f)%(1v. %B%F{red}%1v%f%b.)"
